@@ -1,0 +1,92 @@
+﻿@model Org.Ktu.Isk.P175B602.Autonuoma.Models.SportoSaleF2.SportoSaleF2CE
+
+@* this will also be used as page title in main layout *@
+@{ ViewData["title"] = "Sutarties šalinimas (F2)"; }
+
+@* content header *@
+<div class="main-content-header">
+	<span class="title">@ViewData["title"]</span>
+	<span class="actions">
+		<a 
+			href="@Url.Action("Index")" 
+			class="btn btn-outline-primary btn-sm"
+		>
+			<i class="fa-solid fa-angles-left"></i> Atgal į sarašą
+		</a>
+	</span>
+</div>
+
+@* content itself *@
+<div class="main-content-ced">
+@using( Html.BeginForm(FormMethod.Post, new { @class="entity-d" }) )
+{
+	@Html.AntiForgeryToken()
+
+	<fieldset>
+		<legend class="confirm-msg">Ar tikrai norite šalinti šią sutartį?</legend>
+
+		<dl>
+			<dt>@Html.DisplayNameFor(m => m.SportoSale.Id)</dt>
+			<dd>@Html.DisplayFor(m => m.SportoSale.Id)</dd>
+
+			<dt>@Html.DisplayNameFor(m => m.SportoSale.Pavadinimas)</dt>
+			<dd>@Html.DisplayFor(m => m.SportoSale.Pavadinimas)</dd>
+
+			<dt>@Html.DisplayNameFor(m => m.SportoSale.Adresas)</dt>
+			<dd>@Html.DisplayFor(m => m.SportoSale.Adresas)</dd>			
+		</dl>
+
+		@if( ViewData["deletionNotPermitted"] != null )
+		{
+			<div class="fail-msg">
+				<i class="fa-solid fa-circle-exclamation"></i> Šios sutaries pašalinti negalima, 
+				nes ji yra <i>Patvirtinta</i> arba <i>Užbaigta</i>.
+			</div>
+		}
+		else if (ViewData["0paslaugu"] != null)
+		{
+				<legend class="confirm-msg">KLAIDA</legend>
+			<div class="fail-msg">
+				<i class="fa-solid fa-circle-exclamation"></i> Paslaugu negalima pasalinti turi buti  bent vienas <i>Paslauga</i>.
+			</div>
+		}
+		else if (ViewData["emptypaslauga"] != null)
+		{
+				<legend class="confirm-msg">KLAIDA</legend>
+			<div class="fail-msg">
+				<i class="fa-solid fa-circle-exclamation"></i> Parduotuvėje turi buti bent vienas <i>Paslauga</i>.
+			</div>
+		}
+		@* else if (ViewData["sameId"] != null)
+		{
+				<legend class="confirm-msg">KLAIDA</legend>
+			<div class="fail-msg">
+				<i class="fa-solid fa-circle-exclamation"></i> Asmens kodas sutampa su jau dirbančio darbuotojo asmens kodu.
+			</div>
+		} *@
+		else
+		{
+			<div class="buttons">
+				<button
+					formaction="@Url.Action("DeleteConfirm", new {id = Model.SportoSale.Id})"
+					class="btn btn-danger"
+					style="white-space: nowrap;"
+				><i class="fa-solid fa-trash"></i> Šalinti</button>
+			</div>			
+		}
+	</fieldset>
+}
+</div>
+
+@* content footer *@
+<div class="main-content-footer">
+	<span class="title"></span>
+	<span class="actions">
+		<a 
+			href="@Url.Action("Index")" 
+			class="btn btn-outline-primary btn-sm"
+		>
+			<i class="fa-solid fa-angles-left"></i> Atgal į sarašą
+		</a>
+	</span>
+</div>

@@ -1,0 +1,66 @@
+﻿@model Org.Ktu.Isk.P175B602.Autonuoma.Models.Miestas
+
+@* this will also be used as page title in main layout *@
+@{
+	ViewData["title"] = "Miestų šalinimas";
+}
+
+@* content header *@
+<div class="main-content-header">
+	<span class="title">@ViewData["title"]</span>
+	<span class="actions">
+		<a 
+			href="@Url.Action("Index")" 
+			class="btn btn-outline-primary btn-sm"
+		>
+			<i class="fa-solid fa-angles-left"></i> Back to the list
+		</a>
+	</span>
+</div>
+
+@* content itself *@
+<div class="main-content-ced">
+@using( Html.BeginForm(FormMethod.Post, new { @class="entity-d" }) )
+{
+	@Html.AntiForgeryToken()
+
+	<fieldset>
+		<legend class="confirm-msg">Do you really want to delete this Pareiga?</legend>
+
+		<dl>
+			<dt>@Html.DisplayNameFor(m => m.Pavadinimas)</dt>
+			<dd>@Html.DisplayFor(m => m.Pavadinimas)</dd>
+		</dl>
+
+		@if( ViewData["deletionNotPermitted"] != null )
+		{
+			<div class="fail-msg">
+				<i class="fa-solid fa-circle-exclamation"></i> Miestas negali būti pašalintas, nes jame yra parduotuvių.
+			</div>
+		}
+		else
+		{
+			<div class="buttons">
+				<button
+					formaction="@Url.Action("DeleteConfirm", new {id = Model.Id})"
+					class="btn btn-danger"
+					style="white-space: nowrap;"
+				><i class="fa-solid fa-trash"></i> Delete </button>
+			</div>			
+		}
+	</fieldset>
+}
+</div>
+
+@* content footer *@
+<div class="main-content-footer">
+	<span class="title"></span>
+	<span class="actions">
+		<a 
+			href="@Url.Action("Index")" 
+			class="btn btn-outline-primary btn-sm"
+		>
+			<i class="fa-solid fa-angles-left"></i> Back to the list
+		</a>
+	</span>
+</div>

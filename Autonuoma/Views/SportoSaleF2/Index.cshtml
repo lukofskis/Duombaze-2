@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Org.Ktu.Isk.P175B602.Autonuoma.Models.SportoSaleF2.SportoSaleF2L>
+
+@* this will also be used as page title in main layout *@
+@{ ViewData["title"] = "Sporto sales(F2)"; }
+
+@* content header *@
+<div class="main-content-header">
+	<span class="title">@ViewData["title"]</span>
+	<span class="actions">
+		<a href="@Url.Action("Create")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Sukurti naują</a>
+	</span>
+</div>
+
+@* content itself *@
+<div class="main-content-lst">
+	<table class="entity-list">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(m => m.Id)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.Adresas)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.MaxLankytojuSk)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.Pavadinimas)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.DarboLaikPradzia)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.DarboLaikPabaiga)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.TelefonoNumeris)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.ElPastas)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.internetineSvetaine)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.FkMiestas)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model) {
+			<tr>
+				<td>
+					@Html.DisplayFor(m => item.Id)
+				</td>
+				<td>
+					@Html.DisplayFor(m => item.Adresas)
+				</td>
+				<td>
+					@Html.DisplayFor(m => item.MaxLankytojuSk)
+				</td>
+				<td>
+					@Html.DisplayFor(m => item.Pavadinimas)
+				</td>
+				<td>
+					@Html.DisplayFor(m => item.DarboLaikPradzia)
+				</td>
+				<td>
+					@Html.DisplayFor(m => item.DarboLaikPabaiga)
+				</td>
+				<td>
+					@Html.DisplayFor(m => item.TelefonoNumeris)
+				</td>
+				<td>
+					@Html.DisplayFor(m => item.ElPastas)
+				</td>
+				<td>
+					@Html.DisplayFor(m => item.internetineSvetaine)
+				</td>
+				<td>
+					@Html.DisplayFor(m => item.FkMiestas)
+				</td>
+
+				<td>
+					<a 
+						href="@Url.Action("Edit", new { id = item.Id })" 
+						class="btn btn-primary"
+						><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>
+						
+					<a 
+						href="@Url.Action("Delete", new { id = item.Id })" 
+						class="btn btn-danger"
+						><i class="fa-solid fa-trash"></i> Šalinti</a>					
+				</td>
+			</tr>
+			}
+		</tbody>
+	</table>
+</div>
